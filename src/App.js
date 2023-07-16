@@ -22,13 +22,7 @@ import { easeInOutCubic } from "js-easing-functions";
  * the xy position of the bezier curve at value t.
  * See https://youtu.be/aVwxzDHniEw?t=265
  */
-function xyFromBernsteinPolynomial(
-  p1: vec.Vector2,
-  c1: vec.Vector2,
-  c2: vec.Vector2,
-  p2: vec.Vector2,
-  t: number
-) {
+function xyFromBernsteinPolynomial(p1, c1, c2, p2, t) {
   return [
     vec.scale(p1, -(t ** 3) + 3 * t ** 2 - 3 * t + 1),
     vec.scale(c1, 3 * t ** 3 - 6 * t ** 2 + 3 * t),
@@ -37,16 +31,16 @@ function xyFromBernsteinPolynomial(
   ].reduce(vec.add, [0, 0]);
 }
 
-function inPairs<T>(arr: T[]) {
-  const pairs: [T, T][] = [];
-  for (let i = 0; i < arr.length - 1; i++) {
+function inPairs(arr) {
+  var pairs = [];
+  for (var i = 0; i < arr.length - 1; i++) {
     pairs.push([arr[i], arr[i + 1]]);
   }
-
   return pairs;
 }
 
-function BezierCurves() {
+
+export default function BezierCurves() {
   const [t, setT] = React.useState(0.5);
   const opacity = 1 - (2 * t - 1) ** 6;
 
@@ -76,11 +70,7 @@ function BezierCurves() {
     setT(easeInOutCubic(time, 0, 0.75, duration));
   }, [time]);
 
-  function drawLineSegments(
-    pointPath: vec.Vector2[],
-    color: string,
-    customOpacity = opacity * 0.5
-  ) {
+  function drawLineSegments(pointPath, color, customOpacity = opacity * 0.5) {
     return inPairs(pointPath).map(([p1, p2], index) => (
       <Line.Segment
         key={index}
@@ -92,7 +82,7 @@ function BezierCurves() {
     ));
   }
 
-  function drawPoints(points: vec.Vector2[], color: string) {
+  function drawPoints(points, color) {
     return points.map((point, index) => (
       <Point
         key={index}
