@@ -1,7 +1,7 @@
 {
-  "name": "mafs-create-react-app",
+  "name": "mafs-bezier",
   "version": "0.1.0",
-  "homepage": "https://octoframes.github.io/mafs-create-react-app/",
+  "homepage": "https://octoframes.github.io/mafs-bezier/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
